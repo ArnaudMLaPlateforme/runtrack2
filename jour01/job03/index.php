@@ -4,7 +4,7 @@ $boolVar = true;
 $intVar = 69;
 $stringVar = "LaPlateforme";
 $floatVar = 6.14;
-var_dump($floatVar);
+
 ?>
 
 <!DOCTYPE html>
