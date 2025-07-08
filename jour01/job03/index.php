@@ -1,15 +1,16 @@
 <?php
 
-$boolVar = true;
-$intVar = 69;
-$stringVar = "LaPlateforme";
-$floatVar = 6.14;
+$variables = [
+    "boolVar" => true,
+    "intVar" => 10,
+    "strVar" => "Chaîne de caractère",
+    "floatVar" => 3.14
+];
 
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <title>Types de Variables PHP</title>
@@ -32,9 +33,7 @@ $floatVar = 6.14;
 </head>
 
 <body>
-
     <h2>Tableau des variables PHP</h2>
-
     <table>
         <thead>
             <tr>
@@ -44,29 +43,15 @@ $floatVar = 6.14;
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><?php echo gettype($boolVar); ?></td>
-                <td>boolVar</td>
-                <td><?php echo $boolVar; ?></td>
-            </tr>
-            <tr>
-                <td><?php echo gettype($intVar); ?></td>
-                <td>intVar</td>
-                <td><?php echo $intVar; ?></td>
-            </tr>
-            <tr>
-                <td><?php echo gettype($stringVar); ?></td>
-                <td>stringVar</td>
-                <td><?php echo $stringVar; ?></td>
-            </tr>
-            <tr>
-                <td><?php echo gettype($floatVar); ?></td>
-                <td>floatVar</td>
-                <td><?php echo $floatVar; ?></td>
-            </tr>
+            <?php foreach ($variables as $name => $value): ?>
+                <tr>
+                    <td><?php echo gettype($value); ?></td>
+                    <td><?php echo $name; ?></td>
+                    <td><?php echo is_bool($value) ? ($value ? 'true' : 'false') : $value; ?></td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
-
 </body>
 
 </html>
