@@ -1,4 +1,5 @@
 <?php
+
 // On commence à 2 car 1 n'est pas un nombre premier
 for ($nombre = 2; $nombre <= 1000; $nombre++) {
 
