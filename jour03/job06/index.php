@@ -7,13 +7,11 @@ Ex. : redessop suon rap tnessinif edessop no'l euq sesohc seL -->
 <?php
 
 $str = "Les choses que l'on possede finissent par nous posseder.";
-
-// On initialise une variable $longueur à 0
 $longueur = 0;
 
 // Calcul de la longueur de $str
-// On utilise une boucle while pour parcourir chaque caractère de $str
-// On vérifie si un caractère existe à l'indice $longueur avec isset($str[$longueur])
+// Boucle while pour parcourir chaque caractère de $str
+// Vérification si un caractère existe à l'indice $longueur avec isset($str[$longueur])
 // Tant que c’est vrai, on augmente $longueur de 1
 while (isset($str[$longueur])) {
     $longueur++;
