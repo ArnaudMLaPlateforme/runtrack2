@@ -1,6 +1,6 @@
 <?php
 
-$hauteur = 5;
+$hauteur = 10;
 
 for ($i = 0; $i < $hauteur; $i++) {
 
