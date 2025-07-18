@@ -35,10 +35,10 @@ nom Dupont -->
         </thead>
         <tbody>
             <!-- Boucle pour parcourir le tableau associatif $_GET -->
-            <?php foreach ($_GET as $key => $value) { ?>
+            <?php foreach ($_GET as $argument => $valeur) { ?>
                 <tr>
-                    <td><?php echo $key ?></td>
-                    <td><?php echo $value ?></td>
+                    <td><?php echo $argument ?></td>
+                    <td><?php echo $valeur ?></td>
                 </tr>
             <?php } ?>
         </tbody>
