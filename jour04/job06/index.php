@@ -16,5 +16,20 @@ Après validation du formulaire :
         Nombre: <input type="text" name="number">
         <input type="submit">
     </form>
+
+    <?php
+
+    if (isset($_GET["number"])) {
+        $number = $_GET["number"];
+
+        if ($number %2 == 0) {
+            echo "Nombre pair";
+        } else {
+            echo "Nombre impair";
+        }
+    }
+
+    ?>
+
 </body>
 </html>
