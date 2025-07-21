@@ -23,6 +23,7 @@ Après validation du formulaire :
 
     <?php
 
+        // Vérification si le formulaire a été soumis avec la méthode POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = $_POST["username"];
             $password = $_POST["password"];
