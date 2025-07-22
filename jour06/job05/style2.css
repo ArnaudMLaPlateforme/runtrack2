@@ -1,0 +1,22 @@
+body {
+    background-color: #fff0f5;
+    font-family: 'Courier New', Courier, monospace;
+    color: #800000;
+}
+
+form {
+    background-color: #f9d6d5;
+    padding: 25px;
+    border: 2px solid #800000;
+    border-radius: 4px;
+    width: 320px;
+    margin: 50px auto;
+}
+
+select, button {
+    font-size: 18px;
+    padding: 10px;
+    margin-top: 12px;
+    border-radius: 4px;
+    border: 1px solid #800000;
+}
