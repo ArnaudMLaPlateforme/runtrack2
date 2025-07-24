@@ -1,0 +1,104 @@
+<!-- 
+Pseudocode
+Début de la fonction plateforme($str)
+
+Initialiser une variable resultat comme chaîne vide
+Initialiser une variable mot comme chaîne vide
+
+Pour chaque caractère dans $str faire :
+
+    Si le caractère n’est pas un espace :
+        Ajouter le caractère à la variable mot
+
+    Sinon (le caractère est un espace) :
+        Si le mot se termine par les lettres "me" alors :
+            Ajouter mot + "_" à resultat
+        Sinon :
+            Ajouter mot à resultat
+        Fin Si
+
+        Ajouter un espace à resultat
+        Réinitialiser mot à une chaîne vide
+
+Fin Pour
+
+// Vérifier le dernier mot s’il n’est pas suivi d’un espace
+Si mot n’est pas vide :
+    Si le mot se termine par "me" alors :
+        Ajouter mot + "_" à resultat
+    Sinon :
+        Ajouter mot à resultat
+    Fin Si
+Fin Si
+
+Retourner resultat
+
+Fin de la fonction -->
+
+
+
+<?php
+
+function plateforme($str)
+{
+    $resultat = "";
+    $word = "";
+    $i = 0;
+
+    // Parcours de chaque caractère de $str
+    while (isset($str[$i])) {
+        $char = $str[$i];
+
+        // Si le caractère n’est pas un espace
+        if ($char != " ") {
+            // Ajouter le caractère à la variable mot
+            $word = $word . $char;
+        } else {
+
+            // // Si le mot se termine par "me" alors
+            $longueur = 0;
+            while (isset($word[$longueur])) {
+                $longueur++;
+            }
+            
+            // // Vérifier les deux dernières lettres
+            if ($longueur >= 2 && $word[$longueur - 2] == "m" && $word[$longueur - 1] == "e") {
+                // Ajouter mot + "_" à resultat
+                $resultat = $resultat . $word . "_";
+            } else {
+                // Ajouter mot à resultat
+                $resultat = $resultat . $word;
+            }
+            // Ajouter un espace à resultat
+            $resultat = $resultat . " ";
+            // Réinitialiser mot à une chaîne vide
+            $word = "";
+        }
+
+        $i++;
+    }
+
+    // Vérification du dernier mot (non suivi d'espace)
+    // Si mot n’est pas vide 
+    if ($word != "") {
+
+        // Si le mot se termine par "me" alors
+        $longueur = 0;
+        while (isset($word[$longueur])) {
+            $longueur++;
+        }
+
+        // Vérifier les deux dernières lettres
+        if ($longueur >= 2 && $word[$longueur - 2] == "m" && $word[$longueur - 1] == "e") {
+            // Ajouter mot + "_" à resultat
+            $resultat = $resultat . $word . "_";
+        } else {
+            // // Ajouter mot à resultat
+            $resultat = $resultat . $word;
+        }
+    }
+
+    return $resultat;
+}
+
+?>
