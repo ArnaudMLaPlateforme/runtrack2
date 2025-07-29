@@ -32,17 +32,17 @@ $result = "";
 // Calcul de la longueur de $str
 // Boucle while pour parcourir chaque caractère de $str
 // Vérification si un caractère existe à l'indice $longueur avec isset($str[$longueur])
-// Tant que c’est vrai, on augmente $longueur de 1
+// Tant que c’est vrai, augmenter $longueur de 1
 while (isset($str[$longueur])) {
     $longueur++;
 }
 
-// Pour chaque caractère sauf le dernier, on ajoute à $result le caractère suivant dans $str
+// Pour chaque caractère sauf le dernier, ajouter à $result le caractère suivant dans $str
 for ($i = 0; $i < $longueur - 1; $i++) {
     $result = $result . $str[$i + 1];
 }
 
-// Pour le dernier caractère, on ajoute à $result le premier caractère de $str
+// Pour le dernier caractère, ajouter à $result le premier caractère de $str
 $result = $result . $str[0];
 
 echo $result;
