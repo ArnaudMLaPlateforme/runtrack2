@@ -30,7 +30,7 @@ session_start();
 // Si la variable de session "nbvisites" n'existe pas
 if (!isset($_SESSION["nbvisites"])) {
     // L'initialiser à 0
-    $_SESSION["$nbvisites"] = 0;
+    $_SESSION["nbvisites"] = 0;
 }
 
 // Si le bouton "reset" a été cliqué (si la clé "reset" existe dans $_POST)
