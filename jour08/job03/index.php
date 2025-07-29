@@ -7,10 +7,6 @@ Début
 
     Démarrer la session
 
-    Si le bouton "reset" a été cliqué (si $_POST contient "reset") ALORS
-        - Supprimer la variable de session qui contient les prénoms
-    FIN SI
-
     Si le formulaire a été soumis ET qu’un prénom a été saisi ALORS
         - Récupérer la valeur du champ "prenom"
         
@@ -21,22 +17,27 @@ Début
         - Ajouter le prénom saisi à la liste de prénoms dans la session
     FIN SI
 
+    Si le bouton "reset" a été cliqué (si $_POST contient "reset") ALORS
+        - Supprimer la variable de session qui contient les prénoms
+    FIN SI
+
     Afficher un formulaire HTML contenant :
         - un champ de texte nommé "prenom"
         - un bouton "Envoyer"
         - un bouton "reset"
 
-    Afficher tous les prénoms enregistrés dans la session (sous forme de liste)
+    Si la liste des prénoms dans la session n’est pas vide alors
+        Afficher une liste HTML (<ul>)
+        Pour chaque prénom dans la liste des prénoms dans la session faire
+            Afficher un élément de liste (<li>) contenant ce prénom
+        Fin Pour
+        Fermer la liste HTML (</ul>)
+    Fin Si
 
 Fin -->
 
 <?php
 session_start();
-
-// Réinitialisation si le bouton "reset" est cliqué
-if (isset($_POST["reset"])) {
-    unset($_SESSION["prenoms"]);
-}
 
 // Si le formulaire a été soumis et qu’un prénom a été saisi
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
@@ -52,14 +53,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
     // Ajouter le prénom à la liste
     $_SESSION["prenoms"][] = $prenom;
 }
+
+// Réinitialisation si le bouton "reset" est cliqué
+if (isset($_POST["reset"])) {
+    unset($_SESSION["prenoms"]);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Liste des prénoms</title>
 </head>
+
 <body>
     <form action="" method="POST">
         <input type="text" name="prenom" placeholder="Entrez un prénom">
@@ -67,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
         <input type="submit" value="Reset" name="reset">
     </form>
 
+    <!-- Si la liste des prénoms dans la session n’est pas vide -->
     <?php if (!empty($_SESSION["prenoms"])) { ?>
         <ul>
             <?php foreach ($_SESSION["prenoms"] as $prenom) : ?>
@@ -75,4 +84,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
         </ul>
     <?php } ?>
 </body>
+
 </html>
