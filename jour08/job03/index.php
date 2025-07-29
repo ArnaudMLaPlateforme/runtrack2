@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
     <?php if (!empty($_SESSION["prenoms"])) { ?>
         <ul>
             <?php foreach ($_SESSION["prenoms"] as $prenom) : ?>
-                <li><?= htmlspecialchars($prenom) ?></li>
+                <li><?php echo $prenom ?></li>
             <?php endforeach; ?>
         </ul>
     <?php } ?>
