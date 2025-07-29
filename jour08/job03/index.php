@@ -38,12 +38,14 @@ if (isset($_POST["reset"])) {
     unset($_SESSION["prenoms"]);
 }
 
-// Si un prénom a été envoyé
+// Si le formulaire a été soumis et qu’un prénom a été saisi
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
-    $prenom = trim($_POST["prenom"]);
+    // Récupérer la valeur du champ "prenom"
+    $prenom = $_POST["prenom"];
 
-    // Créer la liste si elle n'existe pas
+    // Si la liste des prénoms n'existe pas encore dans la session
     if (!isset($_SESSION["prenoms"])) {
+        // Créer une liste vide dans la session
         $_SESSION["prenoms"] = [];
     }
 
