@@ -8,7 +8,7 @@ données présentes dans votre base de données. -->
 
 // Connexion à la base de données avec l'objet mysqli (serveur, utilisateur, mot de passe, nom de la base)
 $mysqli = new mysqli("localhost", "root", "root", "jour09");
-// Requête SQL pour récupérer toutes les données de la table "etudiants"
+// Requête SQL pour récupérer l’ensemble des informations des étudiants qui ont moins de 18 ans de la table "etudiants"
 $sql = "SELECT * FROM etudiants WHERE naissance > DATE_SUB(CURDATE(), INTERVAL 18 YEAR)";
 // Exécution de la requête et stockage du résultat dans $result
 $result = $mysqli->query($sql);

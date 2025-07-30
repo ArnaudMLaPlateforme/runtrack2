@@ -8,7 +8,7 @@ données présentes dans votre base de données. -->
 
 // Connexion à la base de données avec l'objet mysqli (serveur, utilisateur, mot de passe, nom de la base)
 $mysqli = new mysqli("localhost", "root", "root", "jour09");
-// Requête SQL pour récupérer toutes les données de la table "etudiants"
+// Requête SQL pour récupérer toutes les données de la table "etudiants" dont prenom commence par un “T”
 $sql = "SELECT * FROM etudiants WHERE prenom LIKE 'T%'";
 // Exécution de la requête et stockage du résultat dans $result
 $result = $mysqli->query($sql);

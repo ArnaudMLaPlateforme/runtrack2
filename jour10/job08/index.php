@@ -1,14 +1,15 @@
 <!-- En utilisant php, connectez-vous à la base de données “jour09”. A l’aide d’une requête
-SQL, récupérez le nombre total d’étudiants dans une colonne nommée “nb_etudiants”.
-Affichez le résultat de cette requête dans un tableau html. La première ligne de votre
-tableau html doit contenir le nom du champ. -->
+SQL, sélectionnez dans une colonne nommée “capacite_totale” la somme des capacités
+des salles. Affichez le résultat de cette requête dans un tableau html. La première ligne
+de votre tableau html doit contenir le nom des champs. Les suivantes doivent contenir
+les données présentes dans votre base de données. -->
 
 <?php
 
 // Connexion à la base de données avec l'objet mysqli (serveur, utilisateur, mot de passe, nom de la base)
 $mysqli = new mysqli("localhost", "root", "root", "jour09");
-// Requête SQL pour récupérer le nombre total d’étudiants de la table "etudiants"
-$sql = "SELECT COUNT(*) AS nombre_etudiants FROM etudiants ";
+// Requête SQL pour additionner la capacité des salles de la table salles
+$sql = "SELECT SUM(capacite) AS capacite_totale FROM salles";
 // Exécution de la requête et stockage du résultat dans $result
 $result = $mysqli->query($sql);
 
@@ -37,7 +38,7 @@ $result = $mysqli->query($sql);
     <table>
         <thead>
             <tr>
-                <th>Nombre d'étudiants</th>
+                <th>Capacité totale</th>
             </tr>
         </thead>
         <tbody>
@@ -45,7 +46,7 @@ $result = $mysqli->query($sql);
             // Parcours du résultat de la requête ligne par ligne avec fetch_assoc()
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['nombre_etudiants']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['capacite_totale']) . "</td>";
                 echo "</tr>";
             }
             $mysqli->close();

@@ -8,7 +8,7 @@ données présentes dans votre base de données. -->
 
 // Connexion à la base de données avec l'objet mysqli (serveur, utilisateur, mot de passe, nom de la base)
 $mysqli = new mysqli("localhost", "root", "root", "jour09");
-// Requête SQL pour récupérer toutes les données de la table "etudiants"
+// Requête SQL pour récupérer toutes les données de la table "etudiants" des étudiants de sexe féminin
 $sql = "SELECT * FROM etudiants WHERE sexe = 'Femme'";
 // Exécution de la requête et stockage du résultat dans $result
 $result = $mysqli->query($sql);
