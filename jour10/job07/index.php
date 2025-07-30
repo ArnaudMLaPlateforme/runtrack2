@@ -1,15 +1,15 @@
 <!-- En utilisant php, connectez-vous à la base de données “jour09”. A l’aide d’une requête
-SQL, récupérez l’ensemble des informations des étudiants qui ont moins de 18 ans.
-Affichez le résultat de cette requête dans un tableau html. La première ligne de votre
-tableau html doit contenir le nom des champs. Les suivantes doivent contenir les
-données présentes dans votre base de données. -->
+SQL, récupérez la superficie totale des étages dans une colonne nommée
+“superficie_totale”. Affichez le résultat de cette requête dans un tableau html. La
+première ligne de votre tableau html doit contenir le nom des champs. Les suivantes
+doivent contenir les données présentes dans votre base de données. -->
 
 <?php
 
 // Connexion à la base de données avec l'objet mysqli (serveur, utilisateur, mot de passe, nom de la base)
 $mysqli = new mysqli("localhost", "root", "root", "jour09");
-// Requête SQL pour récupérer toutes les données de la table "etudiants"
-$sql = "SELECT * FROM etudiants WHERE naissance > DATE_SUB(CURDATE(), INTERVAL 18 YEAR)";
+// Requête SQL pour additionner toutes les valeurs du champ superficie de la table etage
+$sql = "SELECT SUM(superficie) AS superficie_totale FROM etage";
 // Exécution de la requête et stockage du résultat dans $result
 $result = $mysqli->query($sql);
 
@@ -38,11 +38,7 @@ $result = $mysqli->query($sql);
     <table>
         <thead>
             <tr>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Naissance</th>
-                <th>Sexe</th>
-                <th>Email</th>
+                <th>Superficie totale</th>
             </tr>
         </thead>
         <tbody>
@@ -50,11 +46,7 @@ $result = $mysqli->query($sql);
             // Parcours du résultat de la requête ligne par ligne avec fetch_assoc()
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['prenom']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['nom']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['naissance']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['sexe']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['superficie_totale']) . "</td>";
                 echo "</tr>";
             }
             $mysqli->close();
