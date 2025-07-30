@@ -1,4 +1,7 @@
-<!-- Début de la fonction gras(texte)
+<!-- ● “gras” : une fonction qui prend en paramètre “str” : gras($str). Elle écrit “str” en
+mettant en gras (<b>) les mots commençant par une lettre majuscule.
+ 
+Début de la fonction gras(texte)
 
     Initialiser une variable resultat comme chaîne vide
     Initialiser une variable mot comme chaîne vide
@@ -45,7 +48,7 @@ function gras($str) {
             // Le caractère est ajouté au mot
             $mot = $mot . $char;
         } else {
-            // Si le premier caractère de mot est une lettre majuscule (entre 'A' et 'Z')
+            // Si le premier caractère du mot est une lettre majuscule (entre 'A' et 'Z')
             if ($mot[0] >= 'A' && $mot[0] <= 'Z') {
                 // Le mot sera en gras
                 $resultat = $resultat . "<b>" . $mot . "</b>";

@@ -69,8 +69,9 @@ function leetSpeak($str) {
             }
         }
 
+        // Si le caractère n'a pas été remplacé
         if (!$found) {
-            $result .= $str[$i];
+            $result = $result . $str[$i];
         }
     }
 

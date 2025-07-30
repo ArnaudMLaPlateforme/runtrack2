@@ -1,62 +1,99 @@
 <?php
 session_start();
 
-// Initialiser la grille et le joueur si ce n'est pas encore fait
+// Si aucune grille n’existe encore → on la crée
 if (!isset($_SESSION['grille'])) {
-    $_SESSION['grille'] = array_fill(0, 3, array_fill(0, 3, '-'));
+    $_SESSION['grille'] = [
+        ['-', '-', '-'],
+        ['-', '-', '-'],
+        ['-', '-', '-']
+    ];
     $_SESSION['joueur'] = 'X';
+    $_SESSION['message'] = '';
+    $_SESSION['fin'] = false;
 }
 
-// Réinitialiser la partie si bouton cliqué ou partie terminée
-if (isset($_POST['reset']) || isset($_SESSION['fin'])) {
-    $_SESSION['grille'] = array_fill(0, 3, array_fill(0, 3, '-'));
+// Si bouton reset cliqué
+if (isset($_POST['reset'])) {
+    $_SESSION['grille'] = [
+        ['-', '-', '-'],
+        ['-', '-', '-'],
+        ['-', '-', '-']
+    ];
     $_SESSION['joueur'] = 'X';
-    unset($_SESSION['fin']);
+    $_SESSION['message'] = '';
+    $_SESSION['fin'] = false;
 }
 
-// Gérer le clic sur une case
-if (isset($_POST['cell']) && !isset($_SESSION['fin'])) {
-    $cell = explode('-', $_POST['cell']);
-    $row = $cell[0];
-    $col = $cell[1];
+// Si une case a été cliquée et que la partie n'est pas finie
+if (isset($_POST['cellule']) && $_SESSION['fin'] === false) {
+    $valeurs = explode('-', $_POST['cellule']); // ex: "0-2" => [0, 2]
+    $ligne = $valeurs[0];
+    $colonne = $valeurs[1];
 
     // Si la case est vide
-    if ($_SESSION['grille'][$row][$col] === '-') {
-        $_SESSION['grille'][$row][$col] = $_SESSION['joueur'];
+    if ($_SESSION['grille'][$ligne][$colonne] === '-') {
+        $_SESSION['grille'][$ligne][$colonne] = $_SESSION['joueur'];
 
-        // Vérifier s'il y a un gagnant ou match nul
-        if (verifierGagnant($_SESSION['grille'], $_SESSION['joueur'])) {
+        // Vérifie les lignes
+        for ($i = 0; $i < 3; $i++) {
+            if ($_SESSION['grille'][$i][0] === $_SESSION['joueur'] &&
+                $_SESSION['grille'][$i][1] === $_SESSION['joueur'] &&
+                $_SESSION['grille'][$i][2] === $_SESSION['joueur']) {
+                $_SESSION['message'] = $_SESSION['joueur'] . " a gagné !";
+                $_SESSION['fin'] = true;
+            }
+        }
+
+        // Vérifie les colonnes
+        for ($i = 0; $i < 3; $i++) {
+            if ($_SESSION['grille'][0][$i] === $_SESSION['joueur'] &&
+                $_SESSION['grille'][1][$i] === $_SESSION['joueur'] &&
+                $_SESSION['grille'][2][$i] === $_SESSION['joueur']) {
+                $_SESSION['message'] = $_SESSION['joueur'] . " a gagné !";
+                $_SESSION['fin'] = true;
+            }
+        }
+
+        // Vérifie diagonales
+        if ($_SESSION['grille'][0][0] === $_SESSION['joueur'] &&
+            $_SESSION['grille'][1][1] === $_SESSION['joueur'] &&
+            $_SESSION['grille'][2][2] === $_SESSION['joueur']) {
             $_SESSION['message'] = $_SESSION['joueur'] . " a gagné !";
             $_SESSION['fin'] = true;
-        } elseif (grillePleine($_SESSION['grille'])) {
+        }
+
+        if ($_SESSION['grille'][0][2] === $_SESSION['joueur'] &&
+            $_SESSION['grille'][1][1] === $_SESSION['joueur'] &&
+            $_SESSION['grille'][2][0] === $_SESSION['joueur']) {
+            $_SESSION['message'] = $_SESSION['joueur'] . " a gagné !";
+            $_SESSION['fin'] = true;
+        }
+
+        // Vérifie match nul (aucune case vide)
+        $plein = true;
+        for ($i = 0; $i < 3; $i++) {
+            for ($j = 0; $j < 3; $j++) {
+                if ($_SESSION['grille'][$i][$j] === '-') {
+                    $plein = false;
+                }
+            }
+        }
+
+        if ($plein && $_SESSION['fin'] === false) {
             $_SESSION['message'] = "Match nul !";
             $_SESSION['fin'] = true;
-        } else {
-            // Changer de joueur
-            $_SESSION['joueur'] = ($_SESSION['joueur'] === 'X') ? 'O' : 'X';
+        }
+
+        // Change de joueur si la partie continue
+        if ($_SESSION['fin'] === false) {
+            if ($_SESSION['joueur'] === 'X') {
+                $_SESSION['joueur'] = 'O';
+            } else {
+                $_SESSION['joueur'] = 'X';
+            }
         }
     }
-}
-
-// Fonction pour vérifier le gagnant
-function verifierGagnant($grille, $joueur) {
-    // Lignes, colonnes, diagonales
-    for ($i = 0; $i < 3; $i++) {
-        if ($grille[$i][0] === $joueur && $grille[$i][1] === $joueur && $grille[$i][2] === $joueur) return true;
-        if ($grille[0][$i] === $joueur && $grille[1][$i] === $joueur && $grille[2][$i] === $joueur) return true;
-    }
-    if ($grille[0][0] === $joueur && $grille[1][1] === $joueur && $grille[2][2] === $joueur) return true;
-    if ($grille[0][2] === $joueur && $grille[1][1] === $joueur && $grille[2][0] === $joueur) return true;
-
-    return false;
-}
-
-// Fonction pour vérifier si toutes les cases sont remplies
-function grillePleine($grille) {
-    foreach ($grille as $ligne) {
-        if (in_array('-', $ligne)) return false;
-    }
-    return true;
 }
 ?>
 
@@ -64,44 +101,46 @@ function grillePleine($grille) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Jeu du Morpion</title>
+    <title>Morpion sans fonction</title>
     <style>
         table { border-collapse: collapse; margin: 20px auto; }
-        td { width: 60px; height: 60px; text-align: center; border: 1px solid black; }
-        input[type=submit] { width: 100%; height: 100%; font-size: 24px; }
+        td { width: 70px; height: 70px; text-align: center; border: 1px solid #000; }
+        button { width: 100%; height: 100%; font-size: 24px; }
+        .center { text-align: center; }
     </style>
 </head>
 <body>
 
-<h2 style="text-align: center;">Jeu du Morpion</h2>
+<h2 class="center">Jeu du Morpion</h2>
 
-<form method="POST">
+<form method="POST" class="center">
     <table>
-        <?php for ($i = 0; $i < 3; $i++) { ?>
-            <tr>
-                <?php for ($j = 0; $j < 3; $j++) { ?>
-                    <td>
-                        <?php if ($_SESSION['grille'][$i][$j] === '-' && !isset($_SESSION['fin'])) { ?>
-                            <button type="submit" name="cell" value="<?= $i . '-' . $j ?>">-</button>
-                        <?php } else {
-                            echo "<strong>" . $_SESSION['grille'][$i][$j] . "</strong>";
-                        } ?>
-                    </td>
-                <?php } ?>
-            </tr>
-        <?php } ?>
+        <?php
+        for ($i = 0; $i < 3; $i++) {
+            echo "<tr>";
+            for ($j = 0; $j < 3; $j++) {
+                echo "<td>";
+                if ($_SESSION['grille'][$i][$j] === '-' && $_SESSION['fin'] === false) {
+                    echo '<button type="submit" name="cellule" value="' . $i . '-' . $j . '">-</button>';
+                } else {
+                    echo "<strong>" . $_SESSION['grille'][$i][$j] . "</strong>";
+                }
+                echo "</td>";
+            }
+            echo "</tr>";
+        }
+        ?>
     </table>
 
-    <div style="text-align: center;">
-        <input type="submit" name="reset" value="Réinitialiser la partie">
-    </div>
+    <br>
+    <input type="submit" name="reset" value="Réinitialiser la partie">
 </form>
 
-<?php if (isset($_SESSION['message'])) { ?>
-    <p style="text-align: center; font-weight: bold;">
-        <?= $_SESSION['message'] ?>
-    </p>
-<?php } ?>
+<?php
+if ($_SESSION['message'] !== '') {
+    echo "<p class='center'><strong>" . $_SESSION['message'] . "</strong></p>";
+}
+?>
 
 </body>
 </html>

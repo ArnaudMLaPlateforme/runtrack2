@@ -1,4 +1,10 @@
-<!-- Début de la fonction cesar(chaine, decalage = 2)
+<!-- ● “cesar” : une fonction qui prend en paramètre “$str” et un nombre “$decalage”
+(qui vaut 2 par défaut) : cesar($str, $decalage). $str doit s’afficher en décalant
+chaque caractère d’un nombre égal à “$decalage”.
+ex : Si $decalage vaut 1 alors “e” devient “f”. Si décalage vaut 3 alors “z” devient
+“c”.
+ 
+Début de la fonction cesar(chaine, decalage = 2)
 
     Créer un tableau alphabet avec les lettres 'a' à 'z'
     Créer un tableau alphabetMaj avec les lettres 'A' à 'Z'
@@ -68,7 +74,9 @@ function cesar($str, $decalage = 2) {
         // Recherche dans l'alphabet minuscule
         for ($j = 0; isset($alphabet[$j]); $j++) {
             if ($char == $alphabet[$j]) {
+                // Calculer la nouvelle position : (j + decalage) modulo 26 ( permet de revenir au début de l’alphabet après la 26e lettre.)
                 $nouvellePosition = ($j + $decalage) % 26;
+                // Ajouter la lettre de la nouvelle position à resultat
                 $resultat .= $alphabet[$nouvellePosition];
                 $trouve = true;
                 break;
