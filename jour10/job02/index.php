@@ -1,15 +1,15 @@
 <!-- En utilisant php et mysqli, connectez-vous à la base de données “jour09”. A l’aide d’une
-requête SQL, récupérez l’ensemble des informations de la table etudiants. Affichez le
-résultat de cette requête dans un tableau html. La première ligne de votre tableau html
-(thead) doit contenir le nom des champs. Les suivantes (tbody) doivent contenir les
-données présentes dans votre base de données. -->
+requête SQL, récupérez le nom et la capacité de chacune des salles. Affichez le résultat
+de cette requête dans un tableau html. La première ligne de votre tableau html doit
+contenir le nom des champs. Les suivantes doivent contenir les données présentes
+dans votre base de données. -->
 
 <?php
 
 // Connexion à la base de données avec l'objet mysqli (serveur, utilisateur, mot de passe, nom de la base)
 $mysqli = new mysqli("localhost", "root", "root", "jour09");
-// Requête SQL pour récupérer toutes les données de la table "etudiants"
-$sql = "SELECT * FROM etudiants";
+// Requête SQL pour récupérer toutes les données de la table "salles"
+$sql = "SELECT * FROM salles";
 // Exécution de la requête et stockage du résultat dans $result
 $result = $mysqli->query($sql);
 
@@ -38,12 +38,8 @@ $result = $mysqli->query($sql);
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Prénom</th>
                 <th>Nom</th>
-                <th>Naissance</th>
-                <th>Sexe</th>
-                <th>Email</th>
+                <th>Capacité</th>
             </tr>
         </thead>
         <tbody>
@@ -51,12 +47,8 @@ $result = $mysqli->query($sql);
             // Parcours du résultat de la requête ligne par ligne avec fetch_assoc()
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['prenom']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['nom']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['naissance']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['sexe']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['capacite']) . "</td>";
                 echo "</tr>";
             }
             $mysqli->close();
