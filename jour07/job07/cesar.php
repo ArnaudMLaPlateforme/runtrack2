@@ -77,7 +77,7 @@ function cesar($str, $decalage = 2) {
                 // Calculer la nouvelle position : (j + decalage) modulo 26 ( permet de revenir au début de l’alphabet après la 26e lettre.)
                 $nouvellePosition = ($j + $decalage) % 26;
                 // Ajouter la lettre de la nouvelle position à resultat
-                $resultat .= $alphabet[$nouvellePosition];
+                $resultat = $resultat . $alphabet[$nouvellePosition];
                 $trouve = true;
                 break;
             }
@@ -88,7 +88,7 @@ function cesar($str, $decalage = 2) {
             for ($j = 0; isset($alphabetMaj[$j]); $j++) {
                 if ($char == $alphabetMaj[$j]) {
                     $nouvellePosition = ($j + $decalage) % 26;
-                    $resultat .= $alphabetMaj[$nouvellePosition];
+                    $resultat = $resultat . $alphabet[$nouvellePosition];
                     $trouve = true;
                     break;
                 }

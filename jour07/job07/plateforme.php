@@ -44,7 +44,7 @@ Fin de la fonction -->
 function plateforme($str)
 {
     $resultat = "";
-    $word = "";
+    $mot = "";
     $i = 0;
 
     // Parcours de chaque caractère de $str
@@ -54,27 +54,26 @@ function plateforme($str)
         // Si le caractère n’est pas un espace
         if ($char != " ") {
             // Ajouter le caractère à la variable mot
-            $word = $word . $char;
+            $mot = $mot . $char;
         } else {
 
-            // // Si le mot se termine par "me" alors
             $longueur = 0;
-            while (isset($word[$longueur])) {
+            while (isset($mot[$longueur])) {
                 $longueur++;
             }
             
-            // // Vérifier les deux dernières lettres
-            if ($longueur >= 2 && $word[$longueur - 2] == "m" && $word[$longueur - 1] == "e") {
+            //  Vérifier les deux dernières lettres
+            if ($longueur >= 2 && $mot[$longueur - 2] == "m" && $mot[$longueur - 1] == "e") {
                 // Ajouter mot + "_" à resultat
-                $resultat = $resultat . $word . "_";
+                $resultat = $resultat . $mot . "_";
             } else {
                 // Ajouter mot à resultat
-                $resultat = $resultat . $word;
+                $resultat = $resultat . $mot;
             }
             // Ajouter un espace à resultat
             $resultat = $resultat . " ";
             // Réinitialiser mot à une chaîne vide
-            $word = "";
+            $mot = "";
         }
 
         $i++;
@@ -82,21 +81,21 @@ function plateforme($str)
 
     // Vérification du dernier mot (non suivi d'espace)
     // Si mot n’est pas vide 
-    if ($word != "") {
+    if ($mot != "") {
 
         // Si le mot se termine par "me" alors
         $longueur = 0;
-        while (isset($word[$longueur])) {
+        while (isset($mot[$longueur])) {
             $longueur++;
         }
 
         // Vérifier les deux dernières lettres
-        if ($longueur >= 2 && $word[$longueur - 2] == "m" && $word[$longueur - 1] == "e") {
+        if ($longueur >= 2 && $mot[$longueur - 2] == "m" && $mot[$longueur - 1] == "e") {
             // Ajouter mot + "_" à resultat
-            $resultat = $resultat . $word . "_";
+            $resultat = $resultat . $mot . "_";
         } else {
-            // // Ajouter mot à resultat
-            $resultat = $resultat . $word;
+            //  Ajouter mot à resultat
+            $resultat = $resultat . $mot;
         }
     }
 
