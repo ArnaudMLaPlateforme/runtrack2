@@ -57,6 +57,8 @@ function plateforme($str)
             $mot = $mot . $char;
         } else {
 
+            // Si c'est un espace, cela veut dire que le mot est terminé
+            // Calculer la longueur du mot
             $longueur = 0;
             while (isset($mot[$longueur])) {
                 $longueur++;
@@ -83,7 +85,7 @@ function plateforme($str)
     // Si mot n’est pas vide 
     if ($mot != "") {
 
-        // Si le mot se termine par "me" alors
+        // Calculer la longueur du mot
         $longueur = 0;
         while (isset($mot[$longueur])) {
             $longueur++;
