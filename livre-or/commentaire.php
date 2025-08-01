@@ -14,10 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $commentaire = trim($_POST['commentaire']);
 
         // Connexion à la base de données
-        $mysqli = new mysqli("localhost", "root", "root", "livreor");
-        if ($mysqli->connect_error) {
-            die("Erreur de connexion : " . $mysqli->connect_error);
-        }
+        require_once 'db.php';
 
         // Préparer la requête d'insertion
         $stmt = $mysqli->prepare("INSERT INTO commentaires (commentaire, id_utilisateur, date) VALUES (?, ?, NOW())");

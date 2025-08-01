@@ -6,11 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Connexion à la base de données
-    $mysqli = new mysqli("localhost", "root", "root", "livreor");
-
-    if ($mysqli->connect_error) {
-        die("Erreur de connexion : " . $mysqli->connect_error);
-    }
+    require_once 'db.php';
 
     // Préparer une requête pour chercher le login
     $stmt = $mysqli->prepare("SELECT * FROM utilisateurs WHERE login = ?");

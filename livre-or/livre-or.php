@@ -2,11 +2,7 @@
 session_start();
 
 // Connexion à la base de données
-$mysqli = new mysqli("localhost", "root", "root", "livreor");
-
-if ($mysqli->connect_error) {
-    die("Erreur de connexion : " . $mysqli->connect_error);
-}
+require_once 'db.php';
 
 // Requête pour récupérer les commentaires avec les infos utilisateur
 $sql = "SELECT commentaires.commentaire, commentaires.date, utilisateurs.login

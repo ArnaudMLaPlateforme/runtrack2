@@ -9,12 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password_hache = password_hash($password, PASSWORD_DEFAULT);
 
         // Connexion à la base de données
-        $mysqli = new mysqli("localhost", "root", "root", "livreor");
-
-        // Vérifie la connexion
-        if ($mysqli->connect_error) {
-            die("Erreur de connexion : " . $mysqli->connect_error);
-        }
+        require_once 'db.php';
 
         // Préparation et exécution de la requête
         $stmt = $mysqli->prepare("INSERT INTO utilisateurs (login, password) VALUES (?, ?)");
