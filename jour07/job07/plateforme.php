@@ -41,8 +41,8 @@ Fin de la fonction -->
 
 <?php
 
-function plateforme($str)
-{
+function plateforme($str){
+    
     $resultat = "";
     $mot = "";
     $i = 0;

@@ -36,7 +36,7 @@ function occurences($str, $char){
     return $count;
 }
 
-$result = occurences("Bonjour", "o");
+$result = occurences("Bonjoour", "o");
 echo "le nombre d'occurrences de caractère dans
 la chaîne est : $result";
 

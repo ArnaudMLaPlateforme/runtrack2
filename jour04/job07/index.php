@@ -48,22 +48,27 @@ maison qui s’affiche sur la page doit ressembler à ceci : -->
         }
     }
 
-    for ($i = 0; $i < $hauteur; $i++) {
-        for ($j = 0; $j < $largeur; $j++) {
-            // Bord gauche et bord droit
-            if ($j == 0 || $j == $largeur - 1) {
-                echo "|";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $largeur = $_POST["largeur"];
+        $hauteur = $_POST["hauteur"];
+        
+        for ($i = 0; $i < $hauteur; $i++) {
+            for ($j = 0; $j < $largeur; $j++) {
+                // Bord gauche et bord droit
+                if ($j == 0 || $j == $largeur - 1) {
+                    echo "|";
+                }
+                // Si on est sur la dernière ligne
+                elseif ($i == $hauteur - 1) {
+                    echo "_";
+                }
+                // Espaces à l'intérieur
+                else {
+                    echo "&nbsp;&nbsp;";
+                }
             }
-            // Si on est sur la dernière ligne
-            elseif ($i == $hauteur - 1) {
-                echo "_";
-            }
-            // Espaces à l'intérieur
-            else {
-                echo "&nbsp;&nbsp;";
-            }
+            echo "<br />";
         }
-        echo "<br />";
     }
 
 

@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: profil.php");
         exit();
     } else {
-        echo "Login ou mot de passe incorrect.";
+        $erreur = "Login ou mot de passe incorrect.";
     }
 
     $stmt->close();
@@ -45,15 +45,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-papb+59D4a9pe6ylu6lhkT6TH+X6LTXdR5DkvfMivAX3b8IH3dQAYTtuGynUayjz1F60vGBrC7C2xY9K5PZyMw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Connexion</h1>
-    <form action="" method="POST">
-        Nom d'utilisateur<input type="text" name="login">
-        Mot de passe<input type="password" name="password">
-        <input type="submit" value="Se Connecter">
-    </form>
+    <?php include('header.php'); ?>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <section class="form-container">
+                    <h2>Connexion</h2>
+                    <?php if (isset($erreur)): ?>
+                        <div class="error-message"><?php echo htmlspecialchars($erreur); ?></div>
+                    <?php endif; ?>
+                    <form action="" method="POST">
+                        <div class="grid">
+                            <div class="input-group">
+                                <label for="login">Nom d'utilisateur</label>
+                                <input id="login" name="login" type="text" required />
+                            </div>
+
+                            <div class="input-group">
+                                <label for="password">Mot de passe</label>
+                                <input id="password" name="password" type="password" required />
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit">Se Connecter</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </main>
+
 </body>
 
 </html>
