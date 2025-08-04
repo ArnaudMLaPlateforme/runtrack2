@@ -39,6 +39,11 @@ Fin -->
 <?php
 session_start();
 
+// Réinitialisation si le bouton "reset" est cliqué
+if (isset($_POST["reset"])) {
+    unset($_SESSION["prenoms"]);
+}
+
 // Si le formulaire a été soumis et qu’un prénom a été saisi
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
     // Récupérer la valeur du champ "prenom"
@@ -46,19 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["prenom"])) {
 
     // Si la liste des prénoms n'existe pas encore dans la session
     if (!isset($_SESSION["prenoms"])) {
-        // Créer une liste vide dans la session
+        // Créer un tableau vide dans la session
         $_SESSION["prenoms"] = [];
     }
-
+    
     // Ajouter le prénom à la liste
     $_SESSION["prenoms"][] = $prenom;
 }
-
-// Réinitialisation si le bouton "reset" est cliqué
-if (isset($_POST["reset"])) {
-    unset($_SESSION["prenoms"]);
-}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
